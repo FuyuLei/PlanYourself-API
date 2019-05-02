@@ -3,10 +3,8 @@ const list = require('./utility/list');
 
 
 list.fetchList('10').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.list_serno);
         console.log(data.list_name);
@@ -15,27 +13,27 @@ list.fetchList('10').then(data => {
 
 
 list.addList('列表十一').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('add ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
-list.deleteList('11').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+list.deleteList('21').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('delete ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
-list.updateListName('11', '列表11').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+list.updateListName('21', '列表11').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('update ' + data + ' record(s)');
+        console.log(data);
     }
 })

@@ -17,10 +17,10 @@ var displayWork = async function (work_serno) {
             if (data.rows.length > 0) {
                 result = data.rows[0];  //專案資料(物件)
             } else {
-                result = -1;  //找不到資料
+                result = false;  //找不到資料
             }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
         });
 
     //回傳執行結果
@@ -42,10 +42,10 @@ var displayWorkTitle = async function (work_serno) {
             if (data.rows.length > 0) {
                 result = data.rows[0];  //專案資料(物件)
             } else {
-                result = -1;  //找不到資料
+                result = false;  //找不到資料
             }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
         });
 
     //回傳執行結果
@@ -55,7 +55,7 @@ var displayWorkTitle = async function (work_serno) {
 
 
 //------------------------------------------
-// 新增專案資料
+// 新增工作資料
 //------------------------------------------
 var addWork = async function (work_title, work_content, deadline, tag, file, first_principal, second_principal) {
     //存放結果
@@ -64,9 +64,13 @@ var addWork = async function (work_title, work_content, deadline, tag, file, fir
     //讀取資料庫
     await query('insert into work (work_title, work_content, deadline, tag, file, first_principal, second_principal) values ($1, $2, $3, $4, $5, $6, $7)', [work_title, work_content, deadline, tag, file, first_principal, second_principal])
         .then((data) => {
-            result = data.rowCount;  //新增資料數 
+            if (data.rowCount > 0) {
+                result = true;  //成功
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
         });
 
     //回傳執行結果
@@ -76,7 +80,7 @@ var addWork = async function (work_title, work_content, deadline, tag, file, fir
 
 
 //------------------------------------------
-// 刪除專案資料
+// 刪除工作資料
 //------------------------------------------
 var deleteWork = async function (work_serno) {
     //存放結果
@@ -85,9 +89,13 @@ var deleteWork = async function (work_serno) {
     //讀取資料庫
     await query('delete from work where work_serno = $1', [work_serno])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;  //成功
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
         });
 
     //回傳執行結果
@@ -97,7 +105,7 @@ var deleteWork = async function (work_serno) {
 
 
 //------------------------------------------
-// 更改專案名稱
+// 更改工作內容
 //------------------------------------------
 var updateWork = async function (work_serno, work_title, work_content, deadline, tag, file, first_principal, second_principal) {
     //存放結果
@@ -106,9 +114,13 @@ var updateWork = async function (work_serno, work_title, work_content, deadline,
     //讀取資料庫
     await query('update work set work_title = $2, work_content = $3, deadline = $4, tag = $5, file = $6, first_principal = $7, second_principal = $8 where work_serno = $1', [work_serno, work_title, work_content, deadline, tag, file, first_principal, second_principal])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;  //成功
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
         });
 
     //回傳執行結果
@@ -120,7 +132,7 @@ var updateWork = async function (work_serno, work_title, work_content, deadline,
 //------------------------------------------
 // 用work_serno查詢
 //------------------------------------------
-var fetchWrokPrincipal = async function (work_serno) {
+var displayWrokPrincipal = async function (work_serno) {
     //存放結果
     let result;
 
@@ -130,10 +142,10 @@ var fetchWrokPrincipal = async function (work_serno) {
             if (data.rows.length > 0) {
                 result = data.rows[0];  //專案資料(物件)
             } else {
-                result = -1;  //找不到資料
+                result = false;  //找不到資料
             }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
         });
 
     //回傳執行結果
@@ -145,7 +157,7 @@ var fetchWrokPrincipal = async function (work_serno) {
 //------------------------------------------
 // 用user_id查詢
 //------------------------------------------
-var fetchMyWork = async function (user_id) {
+var displayMyWork = async function (user_id) {
     //存放結果
     let result;
 
@@ -155,10 +167,10 @@ var fetchMyWork = async function (user_id) {
             if (data.rows.length > 0) {
                 result = data.rows;  //專案資料(物件)
             } else {
-                result = -1;  //找不到資料
+                result = false;  //找不到資料
             }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
         });
 
     //回傳執行結果
@@ -168,4 +180,4 @@ var fetchMyWork = async function (user_id) {
 
 
 //匯入
-module.exports = { displayWork, displayWorkTitle, addWork, deleteWork, updateWork, fetchWrokPrincipal, fetchMyWork }
+module.exports = { displayWork, displayWorkTitle, addWork, deleteWork, updateWork, displayWrokPrincipal, displayMyWork }
