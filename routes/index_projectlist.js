@@ -2,11 +2,9 @@
 const projectlist = require('./utility/projectlist');
 
 
-projectlist.fetchProjectListP('8').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+projectlist.fetchProjectListP('1').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.projectlist_serno);
         console.log(data.project_id);
@@ -15,11 +13,9 @@ projectlist.fetchProjectListP('8').then(data => {
 })
 
 
-projectlist.fetchProjectListL('A001').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+projectlist.fetchProjectListL('C001').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.projectlist_serno);
         console.log(data.project_id);
@@ -28,19 +24,19 @@ projectlist.fetchProjectListL('A001').then(data => {
 })
 
 
-projectlist.addProjectList('C001', '9').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+projectlist.addProjectList('B001', '3').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('add ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
 projectlist.deleteProjectList('23').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('delete ' + data + ' record(s)');
+        console.log(data);
     }
 })
