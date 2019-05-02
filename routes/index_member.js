@@ -2,10 +2,8 @@
 const member = require('./utility/member');
 
 member.displayMember('twiceisverycute').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.user_id);
         console.log(data.photo);
@@ -16,42 +14,42 @@ member.displayMember('twiceisverycute').then(data => {
     }
 })
 
-member.addMember('twiceisverycute', 'twice', 'TWICE', 'twice@twiceland.idol', 'once', false).then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+member.addMember('twice', 'twice', 'TWICE', 'twice@twiceland.idol', 'once', false).then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('add ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
-member.deleteMember('twiceisverycute').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+member.deleteMember('twiceisno1').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('delete ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 member.updateMemberPhoto('twice', 'once').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('update ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
-member.updateMemberEmail('twiceis', 'twicen@gmail.com').then(data => {
+member.updateMemberEmail('twice', 'twicen@gmail.com').then(data => {
     if (data == -9) {
-        console.log('執行錯誤');
+        console.log('notFound');
     } else {
-        console.log('update ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 member.updateMemberLinebotPush('twice', true).then(data => {
     if (data == -9) {
-        console.log('執行錯誤');
+        console.log('notFound');
     } else {
-        console.log('update ' + data + ' record(s)');
+        console.log(data);
     }
 })

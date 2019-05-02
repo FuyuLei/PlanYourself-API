@@ -17,10 +17,11 @@ var displayProjectPermission = async function (projectpermission_serno) {
             if (data.rows.length > 0) {
                 result = data.rows[0];  //專案資料(物件)
             } else {
-                result = -1;  //找不到資料
+                result = false;  //找不到資料
             }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果
@@ -39,9 +40,14 @@ var addProjectPermission = async function (listpermission, addwork, editwork, de
     //讀取資料庫
     await query('insert into projectpermission (list_permission, add_work, edit_work, delete_work) values ($1, $2, $3, $4)', [listpermission, addwork, editwork, deletework])
         .then((data) => {
-            result = data.rowCount;  //新增資料數 
+            if (data.rowCount > 0) {
+                result = true;  //成功
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果
@@ -59,9 +65,14 @@ var deleteProjectPermission = async function (serno) {
     //讀取資料庫
     await query('delete from projectpermission where projectpermission_serno = $1', [serno])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;  //成功
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果
@@ -80,9 +91,14 @@ var updateProjectPermission = async function (serno, listpermission, addwork, ed
     //讀取資料庫
     await query('update projectpermission set list_permission  = $2, add_work = $3, edit_work = $4, delete_work = $5 where projectpermission_serno = $1', [serno, listpermission, addwork, editwork, deletework])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;  //成功
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果

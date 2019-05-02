@@ -1,12 +1,10 @@
 //增加引用函式
-const permission = require('./utility/permission');
+const permission = require('./utility/projectpermission');
 
 
-permission.displayProjectPermission('11').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+permission.displayProjectPermission('21').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.list_permission);
         console.log(data.add_work);
@@ -17,27 +15,27 @@ permission.displayProjectPermission('11').then(data => {
 
 
 permission.addProjectPermission(false, false, false, false).then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('add ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
-permission.deleteProjectPermission('11').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+permission.deleteProjectPermission('21').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('delete ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
-permission.updateProjectPermission('14', true, true, true, false).then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+permission.updateProjectPermission('21', true, true, true, false).then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('update ' + data + ' record(s)');
+        console.log(data);
     }
 })
