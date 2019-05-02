@@ -17,10 +17,11 @@ var displayMember = async function (userID) {
             if (data.rows.length > 0) {
                 result = data.rows[0];  //學生資料(物件)
             } else {
-                result = -1;  //找不到資料
+                result = false;  //找不到資料
             }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果
@@ -39,9 +40,14 @@ var addMember = async function (userID, photo, memberName, Email, memberPassword
     //讀取資料庫
     await query('insert into member values ($1, $2, $3, $4, $5, $6)', [userID, photo, memberName, Email, memberPassword, LineBotPush])
         .then((data) => {
-            result = data.rowCount;  //新增資料數 
+            if (data.rowCount > 0) {
+                result = true;  //新增
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果
@@ -60,9 +66,14 @@ var deleteMember = async function (userID) {
     //讀取資料庫
     await query('delete from member where user_id = $1', [userID])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果
@@ -81,9 +92,14 @@ var updateMemberPhoto = async function (userID, photo) {
     //讀取資料庫
     await query('update member set photo = $2 where user_id = $1', [userID, photo])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;
+            } else {
+                result = false;
+            }
         }, (error) => {
-            result = -9;  //執行錯誤
+            result = false;  //執行錯誤
+            console.log(error)
         });
 
     //回傳執行結果
@@ -102,7 +118,11 @@ var updateMemberEmail = async function (userID, email) {
     //讀取資料庫
     await query('update member set email = $2 where user_id = $1', [userID, email])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;
+            } else {
+                result = false;
+            }
         }, (error) => {
             result = -9;  //執行錯誤
         });
@@ -123,7 +143,11 @@ var updateMemberLinebotPush = async function (userID, linebotpush) {
     //讀取資料庫
     await query('update member set linebotpush = $2 where user_id = $1', [userID, linebotpush])
         .then((data) => {
-            result = data.rowCount;  //新增資料數
+            if (data.rowCount > 0) {
+                result = true;
+            } else {
+                result = false;
+            }
         }, (error) => {
             result = -9;  //執行錯誤
         });
@@ -135,4 +159,4 @@ var updateMemberLinebotPush = async function (userID, linebotpush) {
 
 
 //匯出
-module.exports = {displayMember, addMember, deleteMember, updateMemberPhoto, updateMemberEmail, updateMemberLinebotPush };
+module.exports = { displayMember, addMember, deleteMember, updateMemberPhoto, updateMemberEmail, updateMemberLinebotPush };
