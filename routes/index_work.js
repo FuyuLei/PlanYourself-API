@@ -3,15 +3,13 @@ const work = require('./utility/work');
 
 
 work.displayWork('10').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.work_serno);
         console.log(data.work_title);
         console.log(data.work_content);
-        console.log(data.deadlint);
+        console.log(data.deadline);
         console.log(data.tag);
         console.log(data.file);
         console.log(data.first_principal);
@@ -21,10 +19,8 @@ work.displayWork('10').then(data => {
 
 
 work.displayWorkTitle('10').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.work_serno);
         console.log(data.work_title);
@@ -32,39 +28,38 @@ work.displayWorkTitle('10').then(data => {
 })
 
 
-work.addWork('工作十五', '這是工作十五', '2019-05-05', '@工作', 'zip', '柯網頁', 'ET').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+work.addWork('工作二三', '這是工作二三', '2019-05-05', '@工作', 'zip', '科學yee', '柯網頁').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('add ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
-work.deleteWork('11').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+work.deleteWork('22').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('delete ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
-work.updateWork('11', '工作十一', '這是工作十一', '2019-05-05', '@工作', 'zip', '張志浩', '張智皓').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+work.updateWork('21', '工作十四', '這是工作十四', '2019-05-05', '@工作', 'zip', '之晴麻麻', '組長大大').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('update ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
-//--------deadline輸出格式有問題
-work.fetchWrokPrincipal('13').then(data => {
+work.displayWrokPrincipal('23').then(data => {
     if (data == -1) {
         console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+    } else if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.first_principal);
         console.log(data.second_principal);
@@ -73,20 +68,15 @@ work.fetchWrokPrincipal('13').then(data => {
 
 
 //--------deadline輸出格式有問題
-work.fetchMyWrok('柯網頁').then(data => {
+work.displayMyWork('柯網頁').then(data => {
     if (data == -1) {
         console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
-    } else {data.forEach(work => {
-        console.log(work.work_serno);
-        console.log(work.work_title);
-        console.log(work.work_content);
-        console.log(work.deadline);
-        console.log(work.tag);
-        console.log(work.file);
-        console.log(work.first_principal);
-        console.log(work.second_principal);        
-    });
+    } else if (!data) {
+        console.log('notFound');
+    } else {
+        data.forEach(work => {
+            console.log(work.work_serno);
+            console.log(work.work_title);
+        });
     }
 })

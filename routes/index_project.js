@@ -3,10 +3,8 @@ const project = require('./utility/project');
 
 
 project.fetchProject('twice').then(data => {
-    if (data == -1) {
-        console.log('找不到資料');
-    } else if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
         console.log(data.project_id);
         console.log(data.projectpermission_serno);
@@ -18,28 +16,28 @@ project.fetchProject('twice').then(data => {
 })
 
 
-project.addProject('twiceisno1', '12', 'TWICE', 'TWICE', '2019-04-25 12:12:12', '2019-12-25 21:21:21', true).then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+project.addProject('twice', '10', 'TWICE', 'TWICE', '2019-04-25 12:12:12', '2019-12-25 21:21:21').then(data => {
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('add ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
 project.deleteProject('twice').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('delete ' + data + ' record(s)');
+        console.log(data);
     }
 })
 
 
 project.updateProjectName('twice', 'once').then(data => {
-    if (data == -9) {
-        console.log('執行錯誤');
+    if (!data) {
+        console.log('notFound');
     } else {
-        console.log('update ' + data + ' record(s)');
+        console.log(data);
     }
 })
